@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List of Notes</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            padding: 20px;
+            background-image: url('https://www.teahub.io/photos/full/14-142012_iphone-gif-wallpaper-really-cool-background..jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+        }
+        h1 {
+            color: #E5E8E7;
+            text-align: left;
+            background-color: #3B3D3C;
+            padding: 10px;
+            margin: 0;
+            font-style: italic;
+            border-radius: 15px;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8);
+            font-size: 40px;
+        }
+        .note {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 5px;
+            background: rgba(255, 255, 255, 0.8);
+        }
+        .note-title {
+            font-weight: bold;
+            color: #007bff;
+            font-family: 'Lato', sans-serif;
+        }
+        .note-content {
+            color: #555;
+        }
+        .note-actions {
+            margin-top: 5px;
+        }
+        .edit-btn, .delete-btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-family: 'Lato', sans-serif;
+        }
+        .edit-btn {
+            background-color: #28a745;
+            color: #fff;
+            margin-right: 5px;
+        }
+        .delete-btn {
+            background-color: #dc3545;
+            color: #fff;
+        }
+            footer {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background-color: rgba(85, 85, 85, 0.6);
+                color: white;
+                text-align: center;
+                padding: 10px 10px;
+            }
+
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;517&display=swap" rel="stylesheet">
+</head>
+<body>
+<h1 class="text-center">NOTES:</h1>
+<div class="note" th:each="note : ${notes}">
+    <span class="note-title" th:text="${note.title}"></span>
+    <p class="note-content" th:text="${note.content}"></p>
+    <div class="note-actions">
+        <a class="edit-btn" th:href="@{'/note/edit?id=' + ${note.id}}">Edit</a>
+        <form method="post" style="display: inline;" th:action="@{/note/delete}">
+            <input th:name="id" th:value="${note.id}" type="hidden">
+            <button class="delete-btn" type="submit">Delete</button>
+        </form>
+    </div>
+</div>
+<a class="btn btn-primary" href="/note/create">Create Note</a>
+<footer>@2023 <a href="https://github.com/VitaliiOsadchukIF?tab=repositories">
+    VitaliiOsadchukIF</a> | <a
+        href="https://www.linkedin.com/in/vitaliy-osadchuk/">LinkedIn</a></footer>
+</body>
+</html>
